@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        #language: [ 'javascript', 'python', 'java', 'cpp', 'csharp','php' ] # Add your language(s)
+        #language: [ 'javascript', 'python', 'java', 'cpp', 'csharp', 'php' ] # Add your language(s)
         language: [ 'php' ] # Add your language(s)
 
     steps:
@@ -24,12 +24,12 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
 
     - name: Autobuild
-      uses: github/codeql-action/autobuild@v2 #or analyze if you build manually.
+      uses: github/codeql-action/autobuild@v3 #or analyze if you build manually.
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
