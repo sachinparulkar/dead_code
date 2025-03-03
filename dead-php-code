@@ -1,0 +1,67 @@
+<?php
+
+function deadFunction1() {
+    echo "This function is never called.";
+    $x = 10; // Unused variable
+}
+
+function deadFunction2($param1, $param2) {
+    if (false) { // Always false condition
+        echo "This branch is unreachable.";
+        $unusedVariable = $param1 + $param2;
+    }
+    return; // Function ends here, any code after is dead.
+    echo "This line is unreachable.";
+}
+
+function liveFunction($value) {
+    if ($value > 0) {
+        echo "Value is positive.";
+    } else {
+        echo "Value is non-positive.";
+    }
+}
+
+$a = 5;
+
+if ($a > 0) {
+    liveFunction($a);
+} else {
+    // This else block is reachable if $a <= 0
+    liveFunction(-1);
+}
+
+// dead code after an exit or die
+if (true) {
+    exit;
+    echo "This will never be printed.";
+}
+
+// dead code after return
+function testReturn(){
+    return;
+    $x = 1;
+    echo $x;
+}
+
+testReturn();
+
+//dead code in a loop that will never run.
+for($i = 10; $i < 0; $i++){
+    echo "This loop will never run";
+}
+
+//dead code due to an always false condition.
+$bool = false;
+if($bool){
+    echo "This will never print";
+}
+
+//dead code due to a function that terminates.
+function terminate(){
+    die("Terminating");
+    echo "This will never print";
+}
+
+terminate();
+?>
